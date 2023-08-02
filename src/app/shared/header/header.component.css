@@ -1,0 +1,12 @@
+.header-container{
+    width: 100%;
+}
+
+.header{
+    background: #2382bf;
+    padding: 10px 24px 10px 19px;
+    width: 100%;
+    margin: 0;
+    justify-content: space-between;
+    flex-flow: row wrap;
+}

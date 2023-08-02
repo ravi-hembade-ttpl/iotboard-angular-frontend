@@ -1,0 +1,122 @@
+.index-container{
+    min-width: 1160px;
+    width: 100%;
+}
+
+.main-area{
+    z-index: 999;
+    position: fixed;
+    top: 55px;
+    bottom: 111px;
+    width: 100%;
+    background: url(../../../assets/images/bgImage.png) no-repeat;
+    background-size: cover;
+}
+
+.login-container {
+    height: 100%;
+    width: 100%;
+    background: url(../../../assets/images/city.png) no-repeat;
+    background-size: cover;
+    align-items: center;
+    justify-content: center;
+    flex-flow: row wrap;
+}
+
+.login-container .login-container-body {
+    width: 85%;
+    height: 100%;
+}
+
+.login-container .login-body-left {
+    height: 100%;
+    background-position: 0 20%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.custom-col{
+    flex: 0 0 62.5%;
+    max-width: 62.5%;
+}
+
+.earth-cloud {
+    background: url(../../../assets/images/cloud.png) 0 50% no-repeat;
+    background-size: 100%;
+    width: 60%;
+    height: 100%;
+    display: inline-flex;
+    align-items: center;
+}
+
+.cloud-text{
+    color: #fff;
+    width: 100%;
+    text-align: center;
+    font-size: 2.5vw;
+    margin: auto;
+    display: inline-block;
+    padding-bottom: 40px;
+    height: 122px;
+    line-height: 98px;
+}
+
+.login-body-right {
+    position: relative;
+}
+
+.login-col {
+    display: block;
+    -ms-flex: 0 0 37.5%;
+    flex: 0 0 37.5%;
+    max-width: 37.5%;
+}
+.login-body-inner{
+    position: relative;
+    width: 380px;
+    background: #fff;
+    padding: 20px 40px;
+    border-radius: 10px;
+    margin-top:100px;
+    margin-left: 50px;
+}
+
+.login-form{
+    position: relative;
+    height: 380px;
+}
+
+.login-title {
+    font-size: 22px;
+    padding: 10px 0 20px;
+    font-weight: 700;
+    color: #2283bf;
+}
+
+.myBtn{
+    margin: 0 5px; 
+    padding: 0 5px;
+    min-width: 6.25rem;
+    height: 34px!important;
+    line-height: 24px;
+}
+
+.submit-btn{
+    width: 100%;
+    height: 38px!important;
+    background: #57afe7!important;
+    color: #fff !important;
+    outline: none!important;
+    border: none!important;
+}
+
+.custom-margin{
+    margin-top:70px !important;
+}
+
+.custom-text{
+    position: relative;
+    max-width: 100%;
+    min-height: 1px;
+    float: right;
+}

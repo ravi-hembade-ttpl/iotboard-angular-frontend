@@ -1,0 +1,40 @@
+.footer{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 112px;
+    font-size: 14px;
+    padding: 0 100px;
+    min-width: 768px;
+    background: #242424;
+    justify-content: center;
+}
+
+.footer-content{
+    flex-wrap: nowrap;
+    flex-direction: column;
+    width: 1200px;
+}
+
+.footer-info a {
+    padding: 12px 40px 12px 0;
+    font-size: 17px;
+    color: white;
+    text-decoration: none;
+}
+
+.footer-info{
+    display: inline-flex !important;
+}
+
+.footer-copyright{
+    margin-top: 15px;
+    display: flex;
+}
+
+.footer-copyright a {
+    color: #fff;
+    margin-right: 6px;
+    text-decoration: none;
+}
