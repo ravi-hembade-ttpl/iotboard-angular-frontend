@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
 import { Router } from '@angular/router';
 import { CustomvalidationService } from 'src/app/shared/shared-service/customvalidation.service';
@@ -21,8 +21,8 @@ export class RegisterComponent implements OnInit {
   showPassword: boolean =false;
   showCP: boolean = false;
   showP: boolean = false;
-
-
+  passwordInput: string ='';
+  passwordInput1: string ='';
   
   constructor(
     private fb: FormBuilder,
@@ -31,16 +31,15 @@ export class RegisterComponent implements OnInit {
     )
     { }
 
-  @ViewChild('stepper')
-  stepper!: MatStepper;
+  @ViewChild('stepper')stepper!: MatStepper;
 
   ngOnInit(): void {
     var arr =['.com','.in'];
     this.firstFormGroup = this.fb.group({
       email: ['', [Validators.required], [this.customValidator.validateEmailAsync()]],
       server : ['', Validators.required],
-      password: ['', [Validators.required, this.customValidator.passwordValidator()]],
-      confirmPassword: ['', [Validators.required, this.customValidator.passwordValidator()]],
+      password: ['', [Validators.required,Validators.minLength(8),this.validatePassword]],
+      confirmPassword: ['', [Validators.required,Validators.minLength(8),this.validatePassword]],
     },{
       validator: Validators.compose([this.customValidator.MatchPassword('password', 'confirmPassword')])
     })
@@ -49,6 +48,14 @@ export class RegisterComponent implements OnInit {
       email: ['', [Validators.required], [this.customValidator.validateEmailAsync()]],
       code:['', Validators.required]
     })
+
+    this.firstFormGroup.get('password')?.valueChanges.subscribe((value: string) => {
+      this.passwordInput = value;
+    });
+
+    this.firstFormGroup.get('confirmPassword')?.valueChanges.subscribe((value: string) => {
+      this.passwordInput1 = value;
+    });
   }
 
   get firstFormGroupControl() {
@@ -125,12 +132,50 @@ export class RegisterComponent implements OnInit {
   {
     console.log("Event--", event.target.value) 
    
-      this.showCP = event.target.value.length >=1 ? true: false;
-    
+    this.showCP = event.target.value.length > 0 &&  event.target.value.length < 8 ? true: false;    
   }
 
   password(event: any)
   {
-    this.showP = event.target.value.length >=1 ? true: false;
+    this.showP = event.target.value.length > 0 &&  event.target.value.length < 8 ? true: false;
+  }
+
+  validatePassword(control: AbstractControl) {
+    const value = control.value;
+    const hasNumber = /\d/.test(value);
+    const hasCapitalLetter = /[A-Z]/.test(value);
+    const hasSmallLetter = /[a-z]/.test(value);
+    const hasSpecialChar = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/.test(value);
+    const errors: any = {};
+
+    if(value.length == 0)
+    {
+      errors.zeroLength = true;
+    }
+    if (value.length >=1 && value.length < 8) {
+      errors.minLength = true;
+    }
+
+    if (!hasNumber) {
+      errors.noNumber = true;
+    }
+
+    if (!hasCapitalLetter) {
+      errors.noCapital = true;
+    }
+
+    if (!hasSmallLetter) {
+      errors.noSmall = true;
+    }
+
+    if (!hasSpecialChar) {
+      errors.noSpecial = true;
+    }
+
+    return Object.keys(errors).length === 0 ? null : errors;
+  }
+
+  ngAfterViewInit() {
+    this.stepper._getIndicatorType = () => 'number';
   }
 }

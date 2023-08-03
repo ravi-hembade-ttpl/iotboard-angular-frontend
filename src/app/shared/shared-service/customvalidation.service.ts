@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
-import { FormBuilder, Validators, FormControl, ValidationErrors, AsyncValidatorFn, AbstractControl, ValidatorFn } from '@angular/forms';
+import { ValidationErrors, AsyncValidatorFn, AbstractControl} from '@angular/forms';
 import { Observable, of } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { forkJoin } from 'rxjs';
 
 
 @Injectable({
@@ -19,17 +17,6 @@ export class CustomvalidationService {
         };
       }
 
-
-  patternValidator(): ValidatorFn {
-    return (control: AbstractControl): { [key: string]: any } => {
-        if (!control.value) {
-            return null!;
-        }
-        const regex = new RegExp('^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$');
-        const valid = regex.test(control.value);
-        return valid ? null! : { invalidPassword: true };
-    };
-}
 
 MatchPassword(password: string, confirmPassword: string) {
     return (formGroup: any) => {
@@ -54,21 +41,5 @@ MatchPassword(password: string, confirmPassword: string) {
         
     }
 }
-
-passwordValidator(): ValidatorFn {
-    return (control: AbstractControl): { [key: string]: boolean } | null => {
-      const password = control.value;
-      const conditions = [
-        /[0-9]/, // Must contain at least 1 number
-        /[A-Z]/, // Must contain at least 1 capital case
-        /[a-z]/, // Must contain at least 1 small case
-        /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/, // Must contain at least 1 special character
-      ];
-  
-      const valid = conditions.every((condition) => condition.test(password));
-  
-      return valid ? null : { invalidPassword: true };
-    };
-  }
 
 }

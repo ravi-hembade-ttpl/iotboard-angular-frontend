@@ -13,6 +13,7 @@ import { ForgotPasswordComponent } from './modules/forgot-password/forgot-passwo
 import { MatStepperModule } from '@angular/material/stepper';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatButtonModule} from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import {MatButtonModule} from '@angular/material/button';
     MatStepperModule,
     BrowserAnimationsModule,
     MatButtonModule,
+    MatIconModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

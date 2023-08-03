@@ -9,7 +9,7 @@
                 <mat-horizontal-stepper labelPosition="bottom" [linear]="isLinear" #stepper>
                     <mat-step [stepControl]="firstFormGroup">
                         <ng-template matStepLabel>Create Account</ng-template>
-                        <form  [formGroup]="firstFormGroup" class="mt-2">
+                        <form  [formGroup]="firstFormGroup">
                             <div class="row center-button">
                                 <div class="col-3 mt-1">
                                     <label><span style="color:red;">*</span> Email Address:</label>
@@ -29,21 +29,33 @@
                                 </div>
                                 <div class="col-5">
                                     <div class="input-group input-group-merge">
-                                        <input type="password" id="password" class="form-control p-2" formControlName="password" (keyup)="password($event)">
+                                        <input type="password" id="password" class="form-control p-2" formControlName="password" (keyup)="password($event)" 
+                                        [ngClass]="{'valid-password': firstFormGroup.get('password')?.valid, 'invalid-password': firstFormGroup.get('password')?.invalid}">
                                         <div class="input-group-text pass-group" data-password="false">
                                             <span class="fa fa-eye" style="cursor: pointer;" *ngIf="!show_password"
                                                 (click)="showpassword('password', this)"></span>
                                             <span class="ri-eye-off-line" style="cursor: pointer;"
                                                 (click)="showpassword('password', this)" *ngIf="show_password"></span>
                                         </div>
-                                        <ul *ngIf="firstFormGroup.get('password')?.hasError('invalidPassword') && showP == true" >
-                                            <li>{{firstFormGroup.get('password')?.hasError('invalidPassword')}}</li>
-                                            <li [style.color]="firstFormGroup.get('password')?.hasError('invalidPassword') ? 'red' : 'green'">Must be at least 8 characters</li>
-                                            <li [style.color]="firstFormGroup.get('password')?.hasError('invalidPassword') ? 'red' : 'green'">Must contain at least 1 number</li>
-                                            <li [style.color]="firstFormGroup.get('password')?.hasError('invalidPassword') ? 'red' : 'green'">Must contain at least 1 capital    case</ li>
-                                            <li [style.color]="firstFormGroup.get('password')?.hasError('invalidPassword') ? 'red' : 'green'">Must contain at least 1 small case</li>
-                                            <li [style.color]="firstFormGroup.get('password')?.hasError('invalidPassword') ? 'red' : 'green'">Must contain at least 1 special character</li>
-                                         </ul>
+                                    </div>
+                                    <div *ngIf="showP">
+                                        <ul [ngStyle]="{'height': showP ? '70px' : '0px'}">
+                                            <li *ngIf="firstFormGroup.get('password')?.hasError('minlength')" class="password-error">
+                                                Password must be at least 8 characters long.
+                                            </li>
+                                            <li *ngIf="firstFormGroup.get('password')?.hasError('noNumber')" class="password-error">
+                                                Password must contain at least 1 number.
+                                            </li>
+                                            <li *ngIf="firstFormGroup.get('password')?.hasError('noCapital')" class="password-error">
+                                                Password must contain at least 1 capital letter.
+                                            </li>
+                                            <li *ngIf="firstFormGroup.get('password')?.hasError('noSmall')" class="password-error">
+                                                Password must contain at least 1 small letter.
+                                            </li>
+                                            <li *ngIf="firstFormGroup.get('password')?.hasError('noSpecial')" class="password-error">
+                                                Password must contain at least 1 special character.
+                                            </li>
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
@@ -53,20 +65,33 @@
                                 </div>
                                 <div class="col-5">
                                     <div class="input-group input-group-merge">
-                                        <input type="password" id="password1" class="form-control p-2" formControlName="confirmPassword" (keyup)="confirmPassword($event)">
+                                        <input type="password" id="password1" class="form-control p-2" formControlName="confirmPassword" (keyup)="confirmPassword($event)"
+                                        [ngClass]="{'valid-password': firstFormGroup.get('confirmPassword')?.valid, 'invalid-password': firstFormGroup.get('confirmPassword')?.invalid}">
                                         <div class="input-group-text pass-group" data-password="false">
                                             <span class="fa fa-eye" style="cursor: pointer;" *ngIf="!showPassword"
                                                 (click)="showConfirmPassword('password1', this)"></span>
                                             <span class="ri-eye-off-line" style="cursor: pointer;"
                                                 (click)="showConfirmPassword('password1', this)" *ngIf="showPassword"></span>
                                         </div>
-                                        <ul *ngIf="firstFormGroup.get('confirmPassword')?.hasError('invalidPassword') && showCP == true">
-                                            <li [style.color]="firstFormGroup.get('confirmPassword')?.hasError('invalidPassword') ? 'red' : 'green'">Must be at least 8 characters</li>
-                                            <li [style.color]="firstFormGroup.get('confirmPassword')?.hasError('invalidPassword') ? 'red' : 'green'">Must contain at least 1 number</li>
-                                            <li [style.color]="firstFormGroup.get('confirmPassword')?.hasError('invalidPassword') ? 'red' : 'green'">Must contain at least 1 capital    case</ li>
-                                            <li [style.color]="firstFormGroup.get('confirmPassword')?.hasError('invalidPassword') ? 'red' : 'green'">Must contain at least 1 small case</li>
-                                            <li [style.color]="firstFormGroup.get('confirmPassword')?.hasError('invalidPassword') ? 'red' : 'green'">Must contain at least 1 special character</li>
-                                         </ul>
+                                    </div>
+                                    <div *ngIf="showCP">
+                                        <ul [ngStyle]="{'height': showCP ? '70px' : '0px'}">
+                                            <li *ngIf="firstFormGroup.get('confirmPassword')?.hasError('minlength')" class="password-error">
+                                                Password must be at least 8 characters long.
+                                            </li>
+                                            <li *ngIf="firstFormGroup.get('confirmPassword')?.hasError('noNumber')" class="password-error">
+                                                Password must contain at least 1 number.
+                                            </li>
+                                            <li *ngIf="firstFormGroup.get('confirmPassword')?.hasError('noCapital')" class="password-error">
+                                                Password must contain at least 1 capital letter.
+                                            </li>
+                                            <li *ngIf="firstFormGroup.get('confirmPassword')?.hasError('noSmall')" class="password-error">
+                                                Password must contain at least 1 small letter.
+                                            </li>
+                                            <li *ngIf="firstFormGroup.get('confirmPassword')?.hasError('noSpecial')" class="password-error">
+                                                Password must contain at least 1 special character.
+                                            </li>
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
@@ -81,17 +106,17 @@
                                       </select>
                                 </div>
                             </div>
-                            <div class="row mt-3 center-button">
+                            <div class="row mt-2 center-button">
                                 <div class="col-3 mt-2">
                                     <input type="checkbox" style="float:right; cursor:pointer;" (change)="selectConditions($event)">
                                 </div>
                                
                                 <div class="col-6">
-                                   <p style="font-weight: bold;">I agree to Thinkitive IoT Cloud's <span style="color:#1890ff;">Terms</span> and <span style="color:#1890ff;">privacy policy</span> and to receive information about Milesight's products.</p>
+                                   <p style="font-weight: bold; font-size:13px;">I agree to Thinkitive IoT Cloud's <span style="color:#1890ff;">Terms</span> and <span style="color:#1890ff;">privacy policy</span> and to receive information about Milesight's products.</p>
                                 </div>
                             </div>
                             <div class="center-button">
-                                <button type="button" class="btn btn-primary" style="width:100px; cursor:pointer;" [disabled]="disableNext"  matStepperNext>Next</button>
+                                <button type="button" class="btn btn-primary" style="width:100px; cursor:pointer; height: 35px;" [disabled]="disableNext"  matStepperNext>Next</button>
                             </div>
                         </form>
                     </mat-step>
@@ -105,9 +130,9 @@
                                 </div>
                                 <div class="col-5">
                                     <input id="field-3" type="email" class="form-control" formControlName="email">
-                                    <div *ngIf="firstFormGroup.get('email')?.errors && firstFormGroup.get('email')?.touched">
-                                        <div *ngIf="firstFormGroup.get('email')?.hasError('required')" class="text-danger">Email is required.</div>
-                                        <div *ngIf="firstFormGroup.get('email')?.hasError('invalidEmail')" class="text-danger">Enter a valid email address
+                                    <div *ngIf="secondFormGroup.get('email')?.errors && secondFormGroup.get('email')?.touched">
+                                        <div *ngIf="secondFormGroup.get('email')?.hasError('required')" class="text-danger">Email is required.</div>
+                                        <div *ngIf="secondFormGroup.get('email')?.hasError('invalidEmail')" class="text-danger">Enter a valid email address
                                         </div>
                                     </div>
                                 </div>
@@ -121,12 +146,12 @@
                                 </div>
                             </div>
                             <div class="mt-5 center-button">
-                                <button type="button" class="btn btn-primary" style="width:100px;" [disabled]="disableCode"  (click)="onNext(true)" matStepperNext>Next</button>
+                                <button type="button" class="btn btn-primary" style="width:100px;cursor:pointer;" [disabled]="disableCode"  (click)="onNext(true)" matStepperNext>Next</button>
                             </div>
                         </form>
                     </mat-step>
 
-                    <mat-step [stepControl]="thirdFormGroup">
+                    <mat-step [stepControl]="thirdFormGroup" [completed]="isCompletedMail">
                         <ng-template matStepLabel>Finished</ng-template>
                         <div class="mt-2 center-button">
                             Registered!!
