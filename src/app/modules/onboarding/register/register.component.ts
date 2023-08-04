@@ -34,7 +34,6 @@ export class RegisterComponent implements OnInit {
   @ViewChild('stepper')stepper!: MatStepper;
 
   ngOnInit(): void {
-    var arr =['.com','.in'];
     this.firstFormGroup = this.fb.group({
       email: ['', [Validators.required], [this.customValidator.validateEmailAsync()]],
       server : ['', Validators.required],

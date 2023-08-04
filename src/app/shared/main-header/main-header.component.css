@@ -1,0 +1,66 @@
+.layout-header{
+    background: #2382bf;
+    height: 55px;
+    padding: 5px 0;
+    display: flex;
+}
+
+.left-logo{
+    width: 225px;
+    height: 45px;
+    line-height: 45px;
+    padding-left: 19px;
+}
+
+.header-image{
+    padding: 0px;
+    height: 45px;
+    display: inline-block;
+    background: url(../../../assets/images/Header-Image.png) 0px 3px / 181px 34px no-repeat;
+    width: 181px;
+    cursor: pointer;
+}
+
+.right-user{
+    height: 45px;
+    line-height: 45px;
+    width: calc(100% - 225px);
+    text-align: right;
+    padding-right: 30px
+}
+
+.right-concent{
+    display: inline-block;
+    height: 100%;
+    padding-left: 40px;
+    position: relative;
+}
+
+.user-body{
+    display: inline-block;
+    height: 50px;
+    position: relative;
+    cursor: pointer;
+    line-height: 45px;
+    min-width: 20px
+}
+
+.user-name{
+    display: inline-block;
+    height: 45px;
+    line-height: 45px;
+    color: #fff;
+    vertical-align: middle;
+    font-size: 15px;
+}
+
+.user-image{
+    margin-left: 10px;
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    background: url(../../../assets/images/user-img.png) no-repeat;
+    background-size: 32px;
+    vertical-align: middle;
+    position: relative;
+}

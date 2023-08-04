@@ -1,22 +1,17 @@
-.index-container{
-    min-width: 1160px;
-    width: 100%;
-}
-
 .main-area{
     z-index: 999;
     position: fixed;
     top: 55px;
     bottom: 111px;
     width: 100%;
-    background: url(../../../assets/images/bgImage.png) no-repeat;
+    background: url(../../../../assets/images/bgImage.png) no-repeat;
     background-size: cover;
 }
 
 .login-container {
     height: 100%;
     width: 100%;
-    background: url(../../../assets/images/city.png) no-repeat;
+    background: url(../../../../assets/images/city.png) no-repeat;
     background-size: cover;
     align-items: center;
     justify-content: center;
@@ -41,7 +36,7 @@
 }
 
 .earth-cloud {
-    background: url(../../../assets/images/cloud.png) 0 50% no-repeat;
+    background: url(../../../../assets/images/cloud.png) 0 50% no-repeat;
     background-size: 100%;
     width: 60%;
     height: 100%;

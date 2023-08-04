@@ -1,0 +1,34 @@
+.layout-body {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    background: #f0f2f5;
+}
+
+.side-nav{
+    flex-direction: row;
+    flex: auto;
+    display: flex;
+}
+
+.layout-content{
+    position: relative;
+    overflow: hidden;
+    background: #fff !important;
+    margin-top: 0px;
+}
+
+.main-content{
+    width: 100%;
+    height: 100%;
+    min-width: 1166px;
+    padding: 10px;
+    background-color: #f0f2f5;
+}
+
+.layout-content .mainshow {
+    height: 100%;
+    min-width: 1116px;
+}

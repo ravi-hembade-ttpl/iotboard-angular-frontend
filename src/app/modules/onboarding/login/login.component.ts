@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +11,9 @@ export class LoginComponent implements OnInit{
   loginForm!: FormGroup;
   show_password: boolean = false;
 
-  constructor(private fb: FormBuilder)
+  constructor(private fb: FormBuilder,
+    private routes : Router,
+    )
   {
 
   }
@@ -32,6 +35,9 @@ export class LoginComponent implements OnInit{
       password: this.loginForm.value.password,
     }
     console.log("loginForm",loginForm)
+    sessionStorage.setItem("email", this.loginForm.value.email);
+    this.routes.navigate(['/dashboard']);
+    
   }
 
   get loginFormControl() {
@@ -51,4 +57,3 @@ export class LoginComponent implements OnInit{
     }
   }
 }
-

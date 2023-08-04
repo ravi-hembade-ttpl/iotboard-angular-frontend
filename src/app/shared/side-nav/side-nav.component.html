@@ -1,1 +1,16 @@
-<p>side-nav works!</p>
+<div class="layout-sidebar" [ngClass]="{'show-icons': showIcon}"> 
+    <div class="sidebar-content">
+        <div class="mt-2">
+            <ul class="menu">
+                <li *ngFor="let item of items" (click)="onItemClick(item)" [ngStyle]="{'background-color': item === selectedItem ? '#e6f7ff' : 'white'}">
+                  <span class="icons d-inline"><i class="{{item.icon}}"></i></span>
+                  <span *ngIf="!showIcon"><a>{{item.name}}</a></span>
+                </li>
+            </ul>              
+        </div>
+    </div>
+    <div class="align-self-baseline d-flex justify-content-center">
+        <i *ngIf="!showIcon" class="ri-menu-unfold-fill" style="font-size: 20px; cursor:pointer;" (click)="changeIcon('collapse')"></i>
+        <i *ngIf="showIcon" class="ri-menu-fold-fill" style="font-size: 20px; cursor:pointer;" (click)="changeIcon('expand')"></i>
+    </div>
+</div>
