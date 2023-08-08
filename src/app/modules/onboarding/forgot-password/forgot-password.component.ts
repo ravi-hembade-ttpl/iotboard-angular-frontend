@@ -1,7 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/auth/auth.service';
 import { CustomvalidationService } from 'src/app/shared/shared-service/customvalidation.service';
 
 @Component({
@@ -11,6 +12,7 @@ import { CustomvalidationService } from 'src/app/shared/shared-service/customval
 })
 export class ForgotPasswordComponent implements OnInit{
   @ViewChild('stepper') stepper!: MatStepper;
+
   previousStepIndex: number =0;
   firstFormGroup!: FormGroup;
   secondFormGroup!: FormGroup;
@@ -27,11 +29,16 @@ export class ForgotPasswordComponent implements OnInit{
   passwordInput: string ='';
   passwordInput1: string ='';
   showP: boolean = false;
+  showEmailError : boolean = false;
+  showCodeError : boolean =false;
+  message : string ='';
 
   constructor(
     private fb: FormBuilder,
     private routes : Router,
     private customValidator : CustomvalidationService,
+    private auth: AuthService,
+    private renderer: Renderer2
     )
     { }
 
@@ -125,6 +132,7 @@ export class ForgotPasswordComponent implements OnInit{
 
   onNext(value:any)
   {
+    this.onSubmit();
     if(value == true)
     {
         setTimeout(() => {
@@ -173,4 +181,39 @@ export class ForgotPasswordComponent implements OnInit{
     this.stepper._getIndicatorType = () => 'number';
   }
 
+  emailExist()
+  {
+    const data={
+      email : this.firstFormGroup.value.email
+    }
+    this.message='';
+    this.auth.forgotPassword(data).subscribe((res:any)=>{
+      this.showEmailError = false;
+      this.renderer.setProperty(this.stepper, 'selectedIndex', 1);
+    },(err:any)=>{
+      this.showEmailError = true;
+      this.message = err.error.errors;
+    })
+  }
+
+  onSubmit()
+  {
+    const data={
+      email: this.firstFormGroup.value.email,
+      otp : this.secondFormGroup.value.code,
+      password: this.secondFormGroup.value.password,
+      confirm_password: this.secondFormGroup.value.confirmPassword
+    }
+    this.message='';
+    this.auth.resetPassword(data).subscribe((res:any)=>{
+      this.showCodeError=false;
+      this.renderer.setProperty(this.stepper, 'selectedIndex', 1);
+    },(err:any)=>{
+      this.showCodeError=true;
+      this.message = err.error.errors;
+    })
+  }
+
+  
+ 
 }

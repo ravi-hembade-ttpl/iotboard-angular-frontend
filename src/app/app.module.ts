@@ -9,10 +9,13 @@ import { HeaderComponent } from './shared/header/header.component';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { MatStepperModule } from '@angular/material/stepper';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatButtonModule} from '@angular/material/button';
+import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MainHeaderComponent } from './shared/main-header/main-header.component';
 import { MainHomeComponent } from './modules/main-home/main-home.component';
+import { AuthService } from './auth/auth.service';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { TokenInterceptorService } from './auth/token-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -27,6 +30,7 @@ import { MainHomeComponent } from './modules/main-home/main-home.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
     MatStepperModule,
@@ -34,7 +38,14 @@ import { MainHomeComponent } from './modules/main-home/main-home.component';
     MatButtonModule,
     MatIconModule,
   ],
-  providers: [],
+  providers: [
+    AuthService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi:  true
+    },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

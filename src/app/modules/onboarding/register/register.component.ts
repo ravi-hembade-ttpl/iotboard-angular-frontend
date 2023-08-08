@@ -1,7 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/auth/auth.service';
 import { CustomvalidationService } from 'src/app/shared/shared-service/customvalidation.service';
 
 @Component({
@@ -10,6 +11,7 @@ import { CustomvalidationService } from 'src/app/shared/shared-service/customval
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
+  @ViewChild('stepper')stepper!: MatStepper;
   firstFormGroup!: FormGroup;
   secondFormGroup!: FormGroup;
   thirdFormGroup!: FormGroup;
@@ -23,18 +25,24 @@ export class RegisterComponent implements OnInit {
   showP: boolean = false;
   passwordInput: string ='';
   passwordInput1: string ='';
+  showRegisterError : boolean = false;
+  showCodeError : boolean =false;
+  message : string ='';
   
   constructor(
     private fb: FormBuilder,
     private customValidator : CustomvalidationService,
     private routes : Router,
-    )
+    private renderer: Renderer2,
+    private auth:AuthService,
+  )
     { }
 
-  @ViewChild('stepper')stepper!: MatStepper;
 
   ngOnInit(): void {
     this.firstFormGroup = this.fb.group({
+      first_name :['', Validators.required],
+      last_name :['', Validators.required],
       email: ['', [Validators.required], [this.customValidator.validateEmailAsync()]],
       server : ['', Validators.required],
       password: ['', [Validators.required,Validators.minLength(8),this.validatePassword]],
@@ -176,5 +184,28 @@ export class RegisterComponent implements OnInit {
 
   ngAfterViewInit() {
     this.stepper._getIndicatorType = () => 'number';
+  }
+
+  onSubmit()
+  {
+    if(this.firstFormGroup.valid)
+    {
+      const data={
+        first_name: this.firstFormGroup.value.first_name,
+        last_name: this.firstFormGroup.value.last_name,
+        email: this.firstFormGroup.value.email,
+        password: this.firstFormGroup.value.password,
+        server: "Asia",
+        terms: true
+      }
+      this.auth.registerUser(data).subscribe((res:any)=>{
+        this.showRegisterError=false;
+        this.renderer.setProperty(this.stepper, 'selectedIndex', 1);
+      },(err:any)=>{
+        this.showRegisterError=true;
+        this.message=err.error.errors;
+      })
+      
+    }
   }
 }

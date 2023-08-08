@@ -9,7 +9,7 @@ export class MainHeaderComponent implements OnInit {
   email:any;
   
   ngOnInit(): void {
-    this.email = sessionStorage.getItem("email");
+    this.email = sessionStorage.getItem("userEmail");
   }
 
 }

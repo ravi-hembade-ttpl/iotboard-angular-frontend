@@ -17,9 +17,9 @@
 .main-form{
     width: 100%;
     height: 100%;
-    padding: 20px 50px;
+    /* padding: 20px 50px;
     background: url(../../../../assets/images/FORM-Image.png) no-repeat;
-    background-position: 50%;
+    background-position: 50%; */
     position: relative;
     display: flex;
     justify-content: center;

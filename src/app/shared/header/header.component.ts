@@ -10,7 +10,7 @@ export class HeaderComponent implements OnInit {
 
   constructor()
   {
-    this.email = sessionStorage.getItem("email");
+    this.email = sessionStorage.getItem("userEmail");
   }
   ngOnInit(): void {
     console.log("email",this.email)
