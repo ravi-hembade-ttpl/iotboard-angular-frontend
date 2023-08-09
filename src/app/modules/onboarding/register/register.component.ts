@@ -88,7 +88,7 @@ export class RegisterComponent implements OnInit {
 
   checkCode(event:any)
   {
-    if(event.target.value.length == 4)
+    if(event.target.value.length >= 4)
     { 
       this.disableCode=false;
     
@@ -101,7 +101,8 @@ export class RegisterComponent implements OnInit {
 
   onNext(value:any)
   {
-    if(value == true)
+    this.verifyCode();
+    if(this.showCodeError==false && value == true)
     {
         setTimeout(() => {
         this.routes.navigate(['/login']);
@@ -202,10 +203,30 @@ export class RegisterComponent implements OnInit {
         this.showRegisterError=false;
         this.renderer.setProperty(this.stepper, 'selectedIndex', 1);
       },(err:any)=>{
+        console.log("Err---", err)
         this.showRegisterError=true;
-        this.message=err.error.errors;
+        this.message=err.error.message;
       })
       
+    }
+  }
+
+  verifyCode()
+  {
+    if(this.secondFormGroup.valid)
+    {
+      const data={
+        email : this.secondFormGroup.value.email,
+        otp : this.secondFormGroup.value.code,
+      }
+
+      this.auth.verifyOTP(data).subscribe((res:any)=>{
+        this.showCodeError=false;
+        this.renderer.setProperty(this.stepper, 'selectedIndex', 1);
+      },(err:any)=>{
+        this.showCodeError = true;
+        this.message=err.error.error
+      })
     }
   }
 }

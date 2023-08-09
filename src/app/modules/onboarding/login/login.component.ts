@@ -11,6 +11,8 @@ import { AuthService } from 'src/app/auth/auth.service';
 export class LoginComponent implements OnInit{
   loginForm!: FormGroup;
   show_password: boolean = false;
+  showError: boolean= false;
+  message: string = '';
 
   constructor(private fb: FormBuilder,
     private routes : Router,
@@ -41,14 +43,19 @@ export class LoginComponent implements OnInit{
       this.auth.loginUser(loginForm).subscribe(
         (res:any)=>{
             console.log("Data--", res)
+            this.showError=false;
+            sessionStorage.setItem("userEmail", this.loginForm.value.email);
+            sessionStorage.setItem("userId", res?.User_id);
+            sessionStorage.setItem("jwtToken", res?.token?.access);
+            this.routes.navigate(['/dashboard']);
         },
         (err: any) => {
           console.log("error--",err.error.errors)
+          this.showError=true;
+          this.message=err.error.errors;
         }
       )
     }
-   // sessionStorage.setItem("userEmail", this.loginForm.value.email);
-   // this.routes.navigate(['/dashboard']);
     
   }
 

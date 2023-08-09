@@ -5,7 +5,7 @@
                 <mat-horizontal-stepper labelPosition="bottom" [linear]="isLinear" #stepper>
                     <mat-step [stepControl]="firstFormGroup">
                         <ng-template matStepLabel>Create Account</ng-template>
-                        <form  [formGroup]="firstFormGroup" class="mt-2">
+                        <form  [formGroup]="firstFormGroup" class="mt-4">
                             <div class="row center-button">
                                 <div class="col-3 mt-1">
                                     <label><span style="color:red;">*</span> First Name:</label>
@@ -125,16 +125,19 @@
                                 </div>
                             </div>
                             <div class="row mt-2 center-button">
-                                <div class="col-3 mt-2">
+                                <div class="col-3 mt-4">
                                     <input type="checkbox" style="float:right; cursor:pointer;" (change)="selectConditions($event)">
                                 </div>
                                
-                                <div class="col-6">
+                                <div class="col-6 mt-3">
                                    <p style="font-weight: bold; font-size:13px;">I agree to Thinkitive IoT Cloud's <span style="color:#1890ff;">Terms</span> and <span style="color:#1890ff;">privacy policy</span> and to receive information about Milesight's products.</p>
                                 </div>
                             </div>
+                            <div *ngIf="showRegisterError" class="alert alert-danger mt-3" role="alert" style="width: initial; height: 45px; text-align: center !important;">
+                                {{message}}
+                            </div>
                             <div class="center-button">
-                                <button type="button" class="btn btn-primary" style="width:100px; cursor:pointer; height: 35px;" [disabled]="disableNext || showRegisterError" (click)="onSubmit()"  matStepperNext>Next</button>
+                                <button type="button" class="btn btn-primary" style="width:100px; cursor:pointer; height: 35px;" [disabled]="disableNext || showRegisterError" (click)="onSubmit()" >Next</button>
                             </div>
                         </form>
                     </mat-step>
@@ -163,8 +166,11 @@
                                     <input id="field-3" type="text" class="form-control" formControlName="code" (keyup)="checkCode($event)">
                                 </div>
                             </div>
+                            <div *ngIf="showCodeError" class="alert alert-danger mt-3" role="alert" style="width: initial; height: 45px; text-align: center !important;">
+                                {{message}}
+                            </div>
                             <div class="mt-5 center-button">
-                                <button type="button" class="btn btn-primary" style="width:100px;cursor:pointer;" [disabled]="disableCode"  (click)="onNext(true)" matStepperNext>Next</button>
+                                <button type="button" class="btn btn-primary" style="width:100px;cursor:pointer;" [disabled]="disableCode || showCodeError"  (click)="onNext(true)">Next</button>
                             </div>
                         </form>
                     </mat-step>

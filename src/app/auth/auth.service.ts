@@ -33,4 +33,8 @@ export class AuthService {
     registerUser(data:any) : Observable<any>{
       return this.http.post<any>(`${this.AuthUrl}/register/`,data)
     }
+
+    verifyOTP(data:any) : Observable<any>{
+      return this.http.post<any>(`${this.AuthUrl}/verify-otp/`,data)
+    }
 }
