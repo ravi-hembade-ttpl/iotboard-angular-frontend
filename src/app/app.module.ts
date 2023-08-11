@@ -16,6 +16,8 @@ import { MainHomeComponent } from './modules/main-home/main-home.component';
 import { AuthService } from './auth/auth.service';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { TokenInterceptorService } from './auth/token-interceptor.service';
+import { MatTabsModule } from '@angular/material/tabs';
+
 
 @NgModule({
   declarations: [
@@ -25,7 +27,8 @@ import { TokenInterceptorService } from './auth/token-interceptor.service';
     HeaderComponent,
     MainHeaderComponent,
     HomeComponent,
-    MainHomeComponent
+    MainHomeComponent,
+  
   ],
   imports: [
     BrowserModule,
@@ -37,6 +40,7 @@ import { TokenInterceptorService } from './auth/token-interceptor.service';
     BrowserAnimationsModule,
     MatButtonModule,
     MatIconModule,
+    MatTabsModule,
   ],
   providers: [
     AuthService,

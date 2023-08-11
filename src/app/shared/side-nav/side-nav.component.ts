@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-side-nav',
@@ -9,17 +10,18 @@ export class SideNavComponent implements OnInit{
   showIcon: boolean =false;
   items : any=[];
   selectedItem: any;
+  constructor(private router: Router) {}
 
   ngOnInit(): void {
     this.items=[
-      {icon:"ri-dashboard-3-line", name:'Dashboard', selected: false},
-      {icon:"ri-macbook-line", name:'My Devices', selected: false},
-      {icon:"ri-road-map-line", name:'Map', selected: false},
-      {icon:"ri-file-code-line", name:'Triggers', selected: false},
-      {icon:"ri-file-chart-line", name:'Reports', selected: false},
-      {icon:"ri-mail-line", name:'Event Center', selected: false},
-      {icon:"ri-cloud-line", name:' Sharing Center', selected: false},
-      {icon:"ri-user-line", name:'Me', selected: false}
+      {icon:"ri-dashboard-3-line", name:'Dashboard', selected: false, route:'/dashboard'},
+      {icon:"ri-macbook-line", name:'My Devices', selected: false, route:'/devices'},
+      {icon:"ri-road-map-line", name:'Map', selected: false, route:'/dashboard'},
+      {icon:"ri-file-code-line", name:'Triggers', selected: false, route:'/dashboard'},
+      {icon:"ri-file-chart-line", name:'Reports', selected: false, route:'/dashboard'},
+      {icon:"ri-mail-line", name:'Event Center', selected: false, route:'/dashboard'},
+      {icon:"ri-cloud-line", name:' Sharing Center', selected: false, route:'/dashboard'},
+      {icon:"ri-user-line", name:'Me', selected: false, route:'/dashboard'}
     ]
     
   }
@@ -34,6 +36,7 @@ export class SideNavComponent implements OnInit{
       this.selectedItem = null; 
     } else {
       this.selectedItem = item; 
+      this.router.navigate([item.route]);
     }
   }
 
