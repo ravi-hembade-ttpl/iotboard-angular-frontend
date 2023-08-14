@@ -1,22 +1,17 @@
-.index-container{
-    min-width: 1160px;
-    width: 100%;
-}
-
 .main-area{
     z-index: 999;
     position: fixed;
     top: 55px;
     bottom: 111px;
     width: 100%;
-    background: url(../../../assets/images/bgImage.png) no-repeat;
+    background: url(../../../../assets/images/bgImage.png) no-repeat;
     background-size: cover;
 }
 
 .login-container {
     height: 100%;
     width: 100%;
-    background: url(../../../assets/images/city.png) no-repeat;
+    background: url(../../../../assets/images/city.png) no-repeat;
     background-size: cover;
     align-items: center;
     justify-content: center;
@@ -41,7 +36,7 @@
 }
 
 .earth-cloud {
-    background: url(../../../assets/images/cloud.png) 0 50% no-repeat;
+    background: url(../../../../assets/images/cloud.png) 0 50% no-repeat;
     background-size: 100%;
     width: 60%;
     height: 100%;
@@ -77,13 +72,12 @@
     background: #fff;
     padding: 20px 40px;
     border-radius: 10px;
-    margin-top:100px;
-    margin-left: 50px;
+    margin-top:85px;
+    margin-left: 58px;
 }
 
 .login-form{
     position: relative;
-    height: 380px;
 }
 
 .login-title {
@@ -110,13 +104,13 @@
     border: none!important;
 }
 
-.custom-margin{
+/* .custom-margin{
     margin-top:70px !important;
-}
+} */
 
 .custom-text{
-    position: relative;
+    /* position: relative; */
     max-width: 100%;
-    min-height: 1px;
+    /* min-height: 1px; */
     float: right;
 }

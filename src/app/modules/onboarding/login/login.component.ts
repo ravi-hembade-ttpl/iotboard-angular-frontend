@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -9,11 +11,15 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class LoginComponent implements OnInit{
   loginForm!: FormGroup;
   show_password: boolean = false;
+  showError: boolean= false;
+  message: string = '';
 
-  constructor(private fb: FormBuilder)
-  {
+  constructor(private fb: FormBuilder,
+    private routes : Router,
+    private auth: AuthService,
+    )
+  { }
 
-  }
   ngOnInit(): void {
     this.loginForm = this.fb.group({
       email: ['',Validators.required],
@@ -32,6 +38,25 @@ export class LoginComponent implements OnInit{
       password: this.loginForm.value.password,
     }
     console.log("loginForm",loginForm)
+    if(this.loginForm.valid)
+    {
+      this.auth.loginUser(loginForm).subscribe(
+        (res:any)=>{
+            console.log("Data--", res)
+            this.showError=false;
+            sessionStorage.setItem("userEmail", this.loginForm.value.email);
+            sessionStorage.setItem("userId", res?.User_id);
+            sessionStorage.setItem("jwtToken", res?.token?.access);
+            this.routes.navigate(['/dashboard']);
+        },
+        (err: any) => {
+          console.log("error--",err.error.errors)
+          this.showError=true;
+          this.message=err.error.errors;
+        }
+      )
+    }
+    
   }
 
   get loginFormControl() {
@@ -51,4 +76,3 @@ export class LoginComponent implements OnInit{
     }
   }
 }
-

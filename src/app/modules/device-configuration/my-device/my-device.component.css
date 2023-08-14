@@ -1,0 +1,14 @@
+.nav-link.active{
+    color: #57afe7;
+    font-weight: bold;
+    border-bottom: none;
+    margin-bottom: -1px;
+    border: 1px solid #fff;
+}
+.nav-link{
+    color: #8a8a8a;
+    border: 1px solid #d0dce3;
+    border-radius: 10px 10px 0 0;
+    width:180px;
+    font-weight: bold;
+}
