@@ -7,6 +7,8 @@ import { DeviceComponent } from './device/device.component';
 import { GatewayComponent } from './gateway/gateway.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 
 
 @NgModule({
@@ -21,6 +23,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatTabsModule,
     FormsModule,
     ReactiveFormsModule,
+    NgbModule,
   ]
 })
 export class DeviceConfigurationModule { }

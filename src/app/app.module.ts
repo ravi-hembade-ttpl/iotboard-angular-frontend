@@ -17,6 +17,8 @@ import { AuthService } from './auth/auth.service';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { TokenInterceptorService } from './auth/token-interceptor.service';
 import { MatTabsModule } from '@angular/material/tabs';
+import { AddDeviceComponent } from './modal/add-device/add-device.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -28,6 +30,7 @@ import { MatTabsModule } from '@angular/material/tabs';
     MainHeaderComponent,
     HomeComponent,
     MainHomeComponent,
+    AddDeviceComponent,
   
   ],
   imports: [
@@ -41,6 +44,7 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatButtonModule,
     MatIconModule,
     MatTabsModule,
+    NgbModule,
   ],
   providers: [
     AuthService,
